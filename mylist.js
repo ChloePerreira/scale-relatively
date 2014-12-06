@@ -2,23 +2,26 @@ $(function (){
   //var myHash = {}; // put in as a param
   //$("ul").sortable();
   var myArray = [];
+  var i = 0;
   $("#myButton").click(function(event){ 
     event.preventDefault();
     myArray.push([$("#myIng").val(), $("#myPer").val(), "empty"]);
+    var holder = myArray.length-1;
     var $myLine = $(
-      "<tr class='line'>" + 
+      "<tr class='line' id = '" + i +"'>" + 
         "<td>" + $("#myPer").val() + "</td>" +
         "<td>" + $("#myIng").val() + "</td>" +
       "</tr>"
-    ).click({param1: myArray, param2: myArray.length-1}, selector);
+    ).click({param1: myArray}, selector); //myArray.length-1 is changing as array gets bigger
     console.log(myArray);
     $("tbody").append($myLine);
+    ++i;
   });
  
   function selector(event) {
     $(this).addClass("selected").siblings().removeClass("selected");
     if ($(this).hasClass("selected")) {
-      var position = event.data.param2; 
+      var position = $(this).attr('id'); 
       var newArray = emptier(event.data.param1);
       newArray[position][2]= prompt(
         "Enter the amount of " + newArray[position][0] + " in grams:");
@@ -53,7 +56,7 @@ $(function (){
     };
     for (var i= 0; i<array.length; ++i){
       var $myLine = $(
-        "<tr class='line'>" + 
+        "<tr class='line' id = '" + i +"'>" + 
           "<td>" + array[i][1] + "</td>" +
           "<td>" + array[i][0] + "</td>" +
           "<td>" + array[i][2] + "</td>" +

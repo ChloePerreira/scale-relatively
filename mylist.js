@@ -17,7 +17,7 @@ $(function (){
     $("tbody").append($myLine);
     ++i;
   });
- 
+ // 
   function selector(event) {
     $(this).addClass("selected").siblings().removeClass("selected");
     if ($(this).hasClass("selected")) {
